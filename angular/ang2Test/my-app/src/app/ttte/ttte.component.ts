@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TtteComponent implements OnInit {
 
+  nameData = [{name:"wo" , desc : "jia"}]
   constructor() { }
 
   ngOnInit() {
