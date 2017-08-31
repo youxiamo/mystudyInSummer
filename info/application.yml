@@ -1,0 +1,112 @@
+spring:
+  application:
+    name: clientjia
+    # 微服务
+    # 主服务端口（cdmc-1.0.0 ） 8090
+    # 运维微服务（web-service ） 3000
+    # 分支管理（branch-manager ） 3100
+    # 设置（settings ） 3200
+    # 部署（deploy ）3300
+    # 外部全景图接口（Branch-map）3400
+    # 度量 （measure）3500
+    # 版本管理（version-management）3600
+    
+    name-micro-web-service: OperationMicroService
+    name-micro-branch-manager: BranchManagerMicroService
+    name-micro-settings: SettingsMicroService
+    name-micro-deploy: DeployMicroServiceYzy
+    name-micro-branch-map: BranchMapMicroService
+    name-micro-measure: MeasureMicroService
+    name-micro-version-management: VersionManagementMicroService
+    
+  datasource:
+    url: **
+    username: **
+    password: **
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j2
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+  aop:
+    auto: true
+    proxy-target-class: false
+  cloud:
+    config:
+      #uri: http://10.111.172.158:7001/ # 直连配置中心 暂时不会使用
+      discovery:
+        enabled: true
+        serviceId: config
+      profile: test
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    excluded-view-names: 
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order: 
+  # 上传限制的文件大小
+  http:
+    multipart:
+      maxFileSize: 200Mb 
+      maxRequestSize: 200Mb 
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/templates/,classpath:/public/
+    
+# 上传文件存放路径，注意windows,linux上不同
+web:
+  upload-path: D://tmp//
+    
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 #默认1000ms
+  threadpool:
+    default:
+      coreSize: 10 #默认10
+    
+    
+# 此端口用于连接eureka,会被配置中心中配置覆盖
+server:
+  port: 8090
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.187.207.42:1111/eureka/
+      
+# 获取pom.xml版本号
+version: 1.0.11    	
+post:
+ slaveUrl: http://10.119.44.157:3001/environment/ #获取slave节点的接口连接
+ registerUrl: http://10.252.19.18:20893/ #获取registerId连接
