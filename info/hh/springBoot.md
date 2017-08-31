@@ -109,3 +109,28 @@ public class AppConfig{}
 
 - 这是
 - 
+
+
+## mysql及spring-data-jpa学习  
+> 数据库的学习和使用
+## jpa
+jpa 可以使用函数名称进行查询,自动的
+> T save(T entity);//保存单个实体  
+Iterable<T> save(Iterable<? extends T> entities);//保存集合  
+T findOne(ID id);//根据id查找实体  
+boolean exists(ID id);//根据id判断实体是否存在  
+Iterable<T> findAll();//查询所有实体,不用或慎用!  
+long count();//查询实体数量  
+void delete(ID id);//根据Id删除实体  
+void delete(T entity);//删除一个实体  
+void delete(Iterable<? extends T> entities);//删除一个实体的集合  
+void deleteAll();//删除所有实体,不用或慎用!  
+使用query也是可以的
+
+>>使用分页  
+> Iterable<T> findAll(Sort sort);//排序  
+Page<T> findAll(Pageable pageable);//分页查询（含排序功能）  
+可以加Query然后也进行排序和分页
+
+@Query自定义查询
+ @Query与 @Modifying 执行更新操作
