@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>***</groupId>
+	<artifactId>***</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>client-demo</name>
+	<description>Spring Cloud project client</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<druid-version>1.0.20</druid-version>
+		<spring-security-version>4.2.1.RELEASE</spring-security-version>
+		<thymeleaf-extras-springsecurity4-version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4-version>
+		<nekohtml-version>1.9.22</nekohtml-version>
+		
+		<dubbo-version>2.8.4</dubbo-version>
+		<zookeeper-version>3.4.6</zookeeper-version>
+		<zkclient-version>0.1</zkclient-version>
+		<swagger-version>2.6.1</swagger-version>
+		<cdmc-api-version>1.0.0</cdmc-api-version>
+	</properties>
+    
+	<dependencies>
+    	<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter</artifactId>
+		    <exclusions>
+		        <exclusion> 
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-logging</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<!-- log4j2 日志-->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		
+		<!-- yml文件 配置-->
+		<dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        
+        	<!-- mysql 数据库连接 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!-- druid 数据库连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid-version}</version>
+		</dependency>
+
+		<!-- jpa 数据层 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<!-- 数据缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+        
+        <!--  hystrix 断路器 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+		
+		<!--  feign 服务发现负载均衡 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+		
+		<!-- eureka 注册中心 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+		
+		<!--  web 接口暴露 -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+		
+		<!-- config 配置中心 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        
+        <!-- swagger2 接口说明管理 -->
+        <dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${swagger-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>${swagger-version}</version>
+		</dependency>
+        <!-- 访问/health 路径来判断服务是否健康 -->
+        <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+    
+        <!-- thymeleaf 模板 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+        
+        <!-- 用于thymeleaf解析html模板 -->
+        <dependency>
+		    <groupId>net.sourceforge.nekohtml</groupId>
+		    <artifactId>nekohtml</artifactId>
+		    <version>${nekohtml-version}</version>
+		</dependency>
+        
+        <!-- aop 切面 -->
+        <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+        
+        <!-- junit 测试 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		
+		<!-- 开发时进行热部署，不需要重启 -->
+	   	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- spring security 权限管理 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <!-- 支持thyeleaf模板 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>   
+            <version>${thymeleaf-extras-springsecurity4-version}</version>
+        </dependency>
+		
+		<!-- dubbo 服务框架 -->
+		<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo-version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>${zookeeper-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkclient-version}</version>
+        </dependency>
+        <!-- dubbo 接口 -->
+        <dependency>
+            <groupId>com.huawei.cbg.tools</groupId>
+            <artifactId>cdmc-api</artifactId>
+            <version>${cdmc-api-version}</version>
+        </dependency>
+		
+		<!-- 其他依赖 -->
+        <!-- 文件上传 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!-- smb支持 -->
+		<dependency>
+            <groupId>jcifs</groupId>
+            <artifactId>jcifs</artifactId>
+            <version>1.3.17</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+		<!-- redis支持 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+		
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.SR5</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+		<plugin>  
+            <!-- 编译插件 -->  
+            <groupId>org.apache.maven.plugins</groupId>  
+            <artifactId>maven-compiler-plugin</artifactId>  
+            <version>3.1</version> 
+            <configuration>  
+                <fork>true</fork>
+                <executable>C:\Program Files (x86)\Java\jdk1.8.0_112\bin\javac.exe</executable>
+            </configuration>  
+        </plugin>  
+       <plugin>  
+            <!-- 安装插件 -->  
+            <groupId>org.apache.maven.plugins</groupId>  
+            <artifactId>maven-install-plugin</artifactId>  
+            <version>2.4</version>  
+        </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+                    <fork>true</fork>
+                </configuration>
+			</plugin>
+			
+			<!-- docker 插件 执行mvn package docker:build会创建镜像 -->
+			<plugin>
+		        <groupId>com.spotify</groupId>
+		        <artifactId>docker-maven-plugin</artifactId>
+		        <version>0.4.13</version>
+		        <configuration>
+		            <imageName>${project.artifactId}</imageName>
+		            <dockerDirectory>${project.basedir}/</dockerDirectory>
+		            <resources>
+		                <resource>
+		                    <targetPath>/</targetPath>
+		                    <directory>${project.build.directory}</directory>
+		                    <include>${project.build.finalName}.jar</include>
+		                </resource>
+		            </resources>
+		        </configuration>
+		    </plugin>
+			
+			<plugin>
+            <groupId>org.codehaus.mojo</groupId>
+             <artifactId>findbugs-maven-plugin</artifactId>
+             <version>3.0.1</version>
+             <configuration>
+             <effort>Max</effort>
+             <threshold>Low</threshold>
+             <findbugsXmlOutput>true</findbugsXmlOutput>
+             <!--<findbugsXmlWithMessages>true</findbugsXmlWithMessages>-->
+             <xmlOutput>true</xmlOutput>
+             <findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
+            </configuration>
+   </plugin>
+		</plugins>
+	</build>
+	<reporting>
+        <plugins>
+               <plugin>
+                      <groupId>org.codehaus.mojo</groupId>
+                      <artifactId>findbugs-maven-plugin</artifactId>
+                      <version>3.0.1</version>
+                      <configuration>
+                      <xmlOutput>true</xmlOutput>
+                      <!-- Optional directoryto put findbugs xdoc xml report -->
+                      <!--<xmlOutputDirectory>target/site</xmlOutputDirectory>-->
+                      <findbugsXmlOutput>true</findbugsXmlOutput>
+                     <!-- <findbugsXmlWithMessages>true</findbugsXmlWithMessages>-->
+                      </configuration>
+               </plugin>
+        </plugins>
+   </reporting>
+</project>
