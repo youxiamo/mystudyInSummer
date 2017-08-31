@@ -55,3 +55,57 @@ server.port=2333 eureka.client.serviceUrl.defaultZone=url
 
 ## 导入其他xml配置bean
 @ImportResource({"classpath:dubbo.xml", "classpath:security.xml"})
+
+
+
+
+
+
+
+## Spring boot 
+@SpringBootAppliction 把@Configcation(配置) 和@ComponentScan(扫描包)和EnableAutoConfiguration 自动配置
+
+## 自定义配置
+spring的security 进行安全配置;每个都是用Configration进行定义式配置;
+在application.yml 或者application.properties中进行配置
+  
+- __配置参数__:在类中使用@ConfigurationProperties("加前缀: spring.http")
+在这个类中的每个变量都会在application.yml 类似于前缀加变量名=变量值的形式:
+- __配置Bean__:使用类注解:使用条件完成注解的方式,当ConditionalOnclass 判断类是否在.
+
+
+
+## 开启缓存
+@Configuration
+@EnableCaching
+public class AppConfig{}
+使用时: @Cacheable 有数据就返回缓存数据,没有就添加进数据
+@CachePut 无论如何
+
+
+## spring 数据模板
+- thymleaf 渲染html的
+- json 渲染 一般都是对象直接渲染出来, 使用@responseBody  在RequestMapping中加=produces={"application/json"} 即可渲染出json数据
+- json 可以用json]view渲染 先配置成bean 然后通过名称使用,数据加载model 中 即可返回写 名称  
+```java
+@Bean
+    public BeanNameViewResolver beanNameViewResolver(){
+        return new BeanNameViewResolver();
+    }
+
+    @Bean
+    public MappingJackson2JsonView jsonView(){
+        MappingJackson2JsonView jsonView= new MappingJackson2JsonView();
+        return jsonView;
+    }
+
+@RequestMapping(value = "/jj",produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String getJson(Model model){
+        model.addAttribute("sign","wori");
+        model.addAttribute("hao","dfsadf");
+        return "jsonView";
+    }
+```
+
+- 这是
+- 
